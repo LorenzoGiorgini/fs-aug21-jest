@@ -1,5 +1,8 @@
 import express from "express";
-import productsRouter from "./products/index.js";
+import productsRouter from "./products/index";
+
+
+process.env.TS_NODE_DEV && require("dotenv").config();
 
 const app = express();
 

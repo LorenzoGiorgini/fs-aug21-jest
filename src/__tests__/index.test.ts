@@ -1,4 +1,4 @@
-import { app } from "../app.js";
+import { app } from "../app";
 import supertest from "supertest";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
@@ -11,7 +11,7 @@ describe("Testing the app endpoints", () => {
   beforeAll((done) => {
     console.log("This gets run before all tests in this suite");
 
-    mongoose.connect(process.env.MONGO_URL_TEST).then(() => {
+    mongoose.connect(process.env.MONGO_URL_TEST!).then(() => {
       console.log("Connected to the test database");
       done();
     });
@@ -29,7 +29,7 @@ describe("Testing the app endpoints", () => {
     price: 200,
   };
 
-  let _id;
+  let _id : string;
 
   it("should check that the POST /products endpoint creates a new product", async () => {
     const response = await request.post("/products").send(validProduct);

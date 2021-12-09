@@ -1,5 +1,5 @@
 import express from "express";
-import { ProductModel } from "./model.js";
+import { ProductModel } from "./model";
 
 const productsRouter = express.Router();
 
@@ -14,34 +14,34 @@ productsRouter
     res.status(201).send(product);
   });
 
-
 productsRouter
-.get("/:id", async (req, res) => {
+  .get("/:id", async (req, res) => {
     const product = await ProductModel.findById(req.params.id);
-    if(product) {
+    if (product) {
       res.status(200).send(product);
-
     } else {
-      res.status(404).send({message: "Product not found"});
+      res.status(404).send({ message: "Product not found" });
     }
-})
-.delete("/:id", async (req, res) => {
+  })
+  .delete("/:id", async (req, res) => {
     const product = await ProductModel.findByIdAndDelete(req.params.id);
-    if(product) {
+    if (product) {
       res.status(204).send({});
-
     } else {
-      res.status(404).send({message: "Product not found"});
+      res.status(404).send({ message: "Product not found" });
     }
-})
-.put("/:id", async (req, res) => {
-    const product = await ProductModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    if(product) {
+  })
+  .put("/:id", async (req, res) => {
+    const product = await ProductModel.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    if (product) {
       res.status(203).send(product);
-
     } else {
-      res.status(404).send({message: "Product not found"});
+      res.status(404).send({ message: "Product not found" });
     }
-})
+  });
 
 export default productsRouter;
